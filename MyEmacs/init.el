@@ -15,7 +15,7 @@
 ;;更改光标样式
 (setq-default cursor-type 'bar)
 ;;关闭启动画面
-(setq inhinit-splash-screen 1)
+(setq inhibit-startup-message t)
 ;;更改默认字体大小，16pt
 (set-face-attribute 'default nil :height 120)
 ;;设置选择删除
