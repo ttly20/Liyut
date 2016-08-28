@@ -1,0 +1,39 @@
+def ##定义一个函数
+input() ##输入函数
+print() ##输出函数
+file.open() ##打开file,'r' 只读打开, 'w' 只写打开 'w+' 读写打开,文件不存在就新建一个,
+file.read() ##读取file
+file.readline() ##在file里读取一行
+file.readlines() ##读取多行
+file.write() ##写入file
+file.writelines() ##写入多行
+file.writeline() ##写入一行
+file.seek() ##类似C中的指针,是跳转到文件中指定的行
+= ##赋值
++ ##加法 字符串链接
+- ##减法
+/ ##除法
+* ##乘法
+return ##返回值
+int() ##转换为整型
+str() ##转换为字符串
+list() ##转换为列表
+tuple() ##转换为元组
+' '' ''' " "" """ ##字符串
+""" ##多行注释
+# ##单行注释
+: ##代码块
+for in ##迭代循环
+while ##条件循环
+if ##条件判断
+!= ##不竿于
+== ##竿于
+or ##或
+and 与
+not ##非
+class ##类
+\ ##转义
+%d %s %r ##格式化输出
+type() ##获取类型
+from sys import argv ##命令行参数
+
