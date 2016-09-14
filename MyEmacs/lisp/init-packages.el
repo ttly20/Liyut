@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;插件管理配置;;;;;;;;;;
+;;;;;;;;;;插件管理配置;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (>= emacs-major-version 24)
@@ -16,6 +16,8 @@
 			 nodejs-repl
 			 yasnippet
 			 cedet
+			 ;;中英文对齐
+			 chinese-fonts-setup
 			 ) "Default packages")
 ;;自动安装缺少的插件
 (defun Liyut_packages_installed_p ()
@@ -40,5 +42,7 @@
 (require 'yasnippet)
 (yas-reload-all t)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
+
+(require 'chinese-fonts-setup)
 
 (provide 'init-packages)
