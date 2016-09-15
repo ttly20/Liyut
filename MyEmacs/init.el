@@ -8,20 +8,24 @@
 (global-linum-mode t)
 ;;显示列号
 (column-number-mode t)
-;;显示80列就换行
+;;行距
+(setq line-spacing 4)
+;;显示75列就换行
 (setq default-fill-column 75)
+(auto-fill-mode 1)
 ;;关闭滚动条
 (scroll-bar-mode -1)
 ;;更改光标样式
 (setq-default cursor-type 'bar)
 ;;关闭启动画面
 (setq inhibit-startup-message t)
-;;更改默认字体大小，16pt
-(set-face-attribute 'default nil :height 120)
+;;更改默认字体大小，24pt
+(set-face-attribute 'default nil :height 240)
 ;;设置选择删除
 (delete-selection-mode 1)
 ;;设置编码为UTF-8
 (set-language-environment "UTF-8")
+(setq default-buffer-file-coding-system 'utf-8)
 ;;快速打开配置文件函数
 (defun open-init-file()
     (interactive)
@@ -49,7 +53,17 @@
 (setq user-mail-address "2750667 at qq.com")
 ;;缩进配置
 (setq default-tab-width 4)
-(setq-default indent-tabls-mode -1)
+(setq-default indent-tabs-mode nil)
+;;备份设置
+(setq
+    backup-by-copying t
+    backup-directory-alist
+	'(("." . "~/.saves"))
+	delete-old-versions t
+	kept-new-versions 6
+	kept-old-versions 2
+	version-control t)
+
 ;;;;;;;;;;;;;;;;;;
 ;;;;加载配置模块;;;;
 ;;;;;;;;;;;;;;;;;;
@@ -61,3 +75,16 @@
 (require 'init-packages)
 ;;加载快捷键配置
 (require 'my-Emacskbd)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cfs--current-profile "profile1" t)
+ '(cfs--profiles-steps (quote (("profile1" . 4))) t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
