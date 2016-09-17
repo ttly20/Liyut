@@ -30,7 +30,7 @@
     [/] run.py
     [/] README.org
 
-**                       TODO : 页面结构
+**                       DONE : 页面结构
 
         [-] 首页
 
@@ -159,9 +159,12 @@
         | play        | url      | no   | no  | yes  |
         | download    | url      | no   | no  | yes  |
         | key         | str      | no   | no  | no   |
+        | navigation  | str      | no   | no  | no   |
+        | player      | str      | no   | no  | no   |
+        | datetime    | data     | no   | no  | no   |
         |-------------+----------+------+-----+------|
 
-        [/] key_link
+        [/] keywords
 
         |-------+----------+------+-----+------|
         | iterm | type     | null | key | only |
@@ -169,6 +172,7 @@
         | id    | auto int | no   | yes | yes  |
         | key   | str      | no   | no  | no   |
         | url   | url      | no   | no  | no   |
+        | hot   | str      | no   | no  | no   |
         |-------+----------+------+-----+------|
 
         [/] station
@@ -183,6 +187,39 @@
         | ad          | str  | no   | no  | no   |
         |-------------+------+------+-----+------|
 
+        [/] navigation
+
+        |-------------+------+------+-----+------|
+        | iterm       | type | null | key | only |
+        |-------------+------+------+-----+------|
+        | title       | str  | no   | yes | yes  |
+        | url         | str  | no   | no  | no   |
+        | key         | str  | no   | no  | no   |
+        | description | str  | no   | no  | no   |
+        | logo        | str  | no   | no  | yes  |
+        |-------------+------+------+-----+------|
+
+        [/] carousel
+
+        |---------+----------+------+-----+------|
+        | iterm   | type     | null | key | only |
+        |---------+----------+------+-----+------|
+        | id      | auto int | no   | yes | yes  |
+        | path    | str      | no   | no  | yes  |
+        | alt     | str      | no   | no  | no   |
+        | caption | str      | yes  | no  | no   |
+        |---------+----------+------+-----+------|
+
+        [/] friend
+
+         |-------+----------+------+-----+------|
+         | iterm | type     | null | key | only |
+         |-------+----------+------+-----+------|
+         | id    | auto int | no   | yes | yes  |
+         | title | str      | no   | no  | yes  |
+         | url   | str      | no   | no  | yes  |
+         |-------+----------+------+-----+------|
+  
 **                       TODO : 功能
 
     script -

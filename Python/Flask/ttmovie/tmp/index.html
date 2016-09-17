@@ -4,8 +4,116 @@
     <title>{{ station.title }}</title>
     <meta charset="utf-8" />
     <meta name="keywords" content="{{ station.keywords }}" />
-    <meta name="description" content="{{ description }}" />
+    <meta name="description" content="{{ station.description }}" />
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
+    <div id="" class="page-top">
+      <div class="site-pub">
+        <ul>
+          <li class="logo"><img src="{{ station.logo }}" alt="{{ station.title }}" /></li>
+          <li class="banner"><img src="station.banner" alt="station.keywords" /></li>
+          <li class="seach">
+            <form id="seach" class="form-inline" role="seach">
+              <div class="form-group">
+                <label class="sr-only" for="seachkeywords">Seach Keywords</label>
+                <input id="seachkeywords" class="form-control" type="email" placeholder="{{ hot }}" />
+              </div>
+              <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+          </li>
+          <li class="user">
+            {{% if not session.logged_in %}}
+            <form id="login" class="form-inline" role="login">
+              <div class="form-group">
+                <label class="sr-only" for="username">用户名</label>
+                <input id="username" class="form-control" placeholder="用户名" />
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="password">密码</label>
+                <input id="passowrd" type="password" placeholder="******" />
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input id="autologin" type="checkbox" /> 自动登陆
+                </label>
+              </div>
+              <p><a href="/register">注册</a></p>
+              <button class="btn btn-defaut" type="submit">登陆</button>
+            </form><!-- user log in -->
+            {{% elif session.logged_in %}}
+            <ul id="user" class="">
+              <li><a href="/">{{ session.username }}</a></li>
+              <li><a href="/">{{ session.recode }}</a></li>
+              <li><a href="/">退出</a></li>
+            </ul><!-- user -->
+            {{% else %}}
+            <p>不存在session</p>
+            {{% endif %}}
+          </li>
+          <li class="site-map"></li>
+        </ul>
+      </div>
+      <div class="site-navigation">
+        <ul>
+          {{% for nav in navs %}}
+          <li><a href="{{ nav.url }}">{{ nav.title }}</a></li>
+          {{% endfor %}}
+        </ul>    
+      </div>
+    </div><!--top-->
+    <div id="" class="page-body">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          {{% for carousel in carousels %}}
+          <li data-target="#carousel-example-generic" data-slide-to="carousel.id"></li>
+          {{% endfor %}}
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          {{% for carousel in carousels %}}
+          <div class="item active">
+            <img src="{{carousel.path}}" alt="carousel.alt" />
+            <div class="carousel-caption">{{ carousel.caption }}</div>
+          </div>
+          {{% endfor %}}
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <!-- list -->
+      {{% for nav in navs %}}
+      <div class="movie-list">
+        <p class="label label-info">{{ nav.title }}</p>
+        <button id="more-btn" type="button" class="btn btn-default" value="{{ nav.title }}">more>></button>
+        {{% for vi_blokc in vi_blocks %}}
+        <div class="movies-box">
+          <img class="img-responsive" src="{{ vi_block.img }}" alt="{{ vi_block.key }}" />
+          <p class="movie-title">{{ vi_block.title }}</p>
+        </div>
+        {{% endfor %}}
+      </div>
+      {{% endfor %}}
+    </div><!--page body-->
+    <div id="" class="page-end">
+      <ul>
+        <li><a href="/about">关于我们</a></li>
+        {{% for friend in friends %}}
+        <li><a href="{{ frined.url }}" rel="nofollow" target="_blank">{{ friend.title }}</a></li>
+        {{% endfor %}}
+      </ul>
+    </div><!--end-->
   </body>
 </html>

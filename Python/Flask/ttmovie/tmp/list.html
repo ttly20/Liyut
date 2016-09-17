@@ -1,11 +1,94 @@
 <!doctype html>
 <html lang="zh">
   <head>
-    <title>{{ station.title }}</title>
+    <title>{{ nav.title-station.title }}</title>
     <meta charset="utf-8" />
-    <meta name="keywords" content="{{ station.keywords }}" />
-    <meta name="description" content="{{ description }}" />
+    <meta name="keywords" content="{{ nav.keywords }}" />
+    <meta name="description" content="{{ nav.description }}" />
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
+    <div id="" class="page-top">
+      <div class="site-pub">
+        <ul>
+          <li class="logo"><img src="{{ station.logo }}" alt="{{ station.title }}" /></li>
+          <li class="banner"><img src="station.banner" alt="station.keywords" /></li>
+          <li class="seach">
+            <form id="seach" class="form-inline" role="seach">
+              <div class="form-group">
+                <label class="sr-only" for="seachkeywords">Seach Keywords</label>
+                <input id="seachkeywords" class="form-control" type="email" placeholder="{{ hot }}" />
+              </div>
+              <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+          </li>
+          <li class="user">
+            {{% if not session.logged_in %}}
+            <form id="login" class="form-inline" role="login">
+              <div class="form-group">
+                <label class="sr-only" for="username">用户名</label>
+                <input id="username" class="form-control" placeholder="用户名" />
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="password">密码</label>
+                <input id="passowrd" type="password" placeholder="******" />
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input id="autologin" type="checkbox" /> 自动登陆
+                </label>
+              </div>
+              <p><a href="/register">注册</a></p>
+              <button class="btn btn-defaut" type="submit">登陆</button>
+            </form><!-- user log in -->
+            {{% elif session.logged_in %}}
+            <ul id="user" class="">
+              <li><a href="/">{{ session.username }}</a></li>
+              <li><a href="/">{{ session.recode }}</a></li>
+              <li><a href="/">退出</a></li>
+            </ul><!-- user -->
+            {{% else %}}
+            <p>不存在session</p>
+            {{% endif %}}
+          </li>
+          <li class="site-map"></li>
+        </ul>
+      </div>
+      <div class="site-navigation">
+        <ul>
+          {{% for nav in navs %}}
+          <li><a href="{{ nav.url }}">{{ nav.title }}</a></li>
+          {{% endfor %}}
+        </ul>    
+      </div>
+    </div><!--top-->
+    <div class="page-body">
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">{{ nav.title }}</a></li>
+      </ol><!-- 次导航 -->
+      <ol class="movie-list">
+        <li><h1>{{ nav.title }}</h1></li>
+        {{% for movie in movies %}}
+        <li>
+          {{% for numb in [0,1,2] %}}
+          <div class="movie-box">
+            <img class="img-responsive" src="{{ movie.img }}" alt="{{ movie.key }}" />
+            <p class="movie-title">{{ movie.title }}</p>
+          </div>
+          {{% endfor %}}
+        </li>
+        {{% endfor %}}
+      </ol>
+    </div><!-- page body -->
+    <div id="" class="page-end">
+      <ul>
+        <li><a href="/about">关于我们</a></li>
+        {{% for friend in friends %}}
+        <li><a href="{{ frined.url }}" rel="nofollow" target="_blank">{{ friend.title }}</a></li>
+        {{% endfor %}}
+      </ul>
+    </div><!--end-->
   </body>
 </html>
