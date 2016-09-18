@@ -10,15 +10,14 @@
             [+] usr
     [-] script
         [-] data
-            [/] init.ini
-            [/] connection.py
-            [/] data_op.py
+            [/] install.py
+            [/] install.sql
         [-] safe
             [/] str_safe.py
             [/] url_safe.py
         [-] function
             [/] str_fun.py
-            [/] data_fun.py
+            [/] database.py
             [/] usr_fun.py
             [/] ad_fun.py
     [-] tmp
