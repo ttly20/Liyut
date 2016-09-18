@@ -129,22 +129,21 @@
         |      | 次     | 导                              | 航   |      |          |
         |------+--------+---------------------------------+------+------+----------|
 
-**                       TODO : 数据结构
+**                       DONE : 数据结构
 
     [-] TABLE
         [/] usr
 
-        |-----------+----------+------+-----+------|
-        | iterm     | type     | null | key | only |
-        |-----------+----------+------+-----+------|
-        | ID        | auto int | no   | no  | yes  |
-        | name      | str      | no   | yes | yes  |
-        | password  | str      | no   | no  | no   |
-        | email     | str      | no   | no  | no   |
-        | sex       | str      | no   | no  | no   |
-        | ad        | str      | yes  | no  | no   |
-        | collction | str      | yes  | no  | no   |
-        |-----------+----------+------+-----+------|
+        |----------+----------+------+-----+------|
+        | iterm    | type     | null | key | only |
+        |----------+----------+------+-----+------|
+        | ID       | auto int | no   | no  | yes  |
+        | username | str      | no   | yes | yes  |
+        | password | str      | no   | no  | no   |
+        | email    | str      | no   | no  | no   |
+        | sex      | str      | no   | no  | no   |
+        | ad       | str      | yes  | no  | no   |
+        |----------+----------+------+-----+------|
         注:admin用户为固定某个,之初始化时指定
 
         [/] movie
@@ -158,7 +157,7 @@
         | poster      | url      | no   | no  | yes  |
         | play        | url      | no   | no  | yes  |
         | download    | url      | no   | no  | yes  |
-        | key         | str      | no   | no  | no   |
+        | keywords    | str      | no   | no  | no   |
         | navigation  | str      | no   | no  | no   |
         | player      | str      | no   | no  | no   |
         | datetime    | data     | no   | no  | no   |
@@ -172,7 +171,7 @@
         | id    | auto int | no   | yes | yes  |
         | key   | str      | no   | no  | no   |
         | url   | url      | no   | no  | no   |
-        | hot   | str      | no   | no  | no   |
+        | hot   | int      | no   | no  | no   |
         |-------+----------+------+-----+------|
 
         [/] station
@@ -205,7 +204,7 @@
         | iterm   | type     | null | key | only |
         |---------+----------+------+-----+------|
         | id      | auto int | no   | yes | yes  |
-        | path    | str      | no   | no  | yes  |
+        | imgpath | str      | no   | no  | yes  |
         | alt     | str      | no   | no  | no   |
         | caption | str      | yes  | no  | no   |
         |---------+----------+------+-----+------|
