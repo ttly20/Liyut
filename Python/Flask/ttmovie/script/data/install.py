@@ -1,22 +1,22 @@
 import MySQLdb as mdb
 import os
 
-station_init = open("install.sql","r")
+station_init = open("install.sql", "r")
 
 try:
-    ##create database cursor
-    con = mdb.connect("localhost","root","..22lxy.")
+    # Ceate database cursor
+    con = mdb.connect("localhost", "root", "..22lxy.")
     cur = con.cursor()
-    ##database operate
+    # Database operate
     for sqlStr in station_init.readlines():
         print sqlStr
         cur.execute(sqlStr)
     print "database done"
 except IOError:
     print "Error:Profile not found!"
-except mdb.Error,e:
+except mdb.Error, e:
     try:
-        sqlError = "Error %d:%s" % (e.args[0],e.args[1])
+        sqlError = "Error %d:%s" % (e.args[0], e.args[1])
     except IndexError:
         print "MySQL Error:%s" % str(e)
 finally:
