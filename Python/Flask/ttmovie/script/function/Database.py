@@ -32,7 +32,8 @@ method:_senteSafe()
  Prototype method:
   def _senteSafe(self, str)
  This method is to do security checks
- This method returns an exception when it detects a SQL statement security problem,or does nothing:
+ This method returns an exception when it detects a SQL statement securi-
+ty problem,or does nothing:
  safeErerr
 '''
 
@@ -44,7 +45,7 @@ class Database:
 
     def __init__(self, localhost, username, password, database):
         try:
-            self.con = mdb.connection(localhost, username, password, \
+            self.con = mdb.connection(localhost, username, password,
                                       database)
             self.cur = con.cursor()
         except mdb.Error, e:
@@ -58,28 +59,33 @@ class Database:
 
     def _senteSafe(self, str):
         try:
-            sqlRe = re.compile(r"\bselect|updata|insert|delect|alter|exec\b"
-                        , re.I)
-            sqlQualifi = re.compile(r'\bwhere|values|from|like|into|set\b'
-                        , re.I)
-            if sqlRe.search(str) != None:
-                if sqlQualifi.search(str) != None:
+            sqlRe = re.compile(r"\bselect|updata|insert|delect|alter|exec\b",
+                               re.I)
+            sqlQualifi = re.compile(r'\bwhere|values|from|like|into|set\b',
+                                    re.I)
+            if sqlRe.search(str) is cond:
+                if sqlQualifi.search(str) is cond:
                     raise "safeErerr", str
         except "safeErerr":
             return "safe ererr:" + e.args
+
     def _senteSelect(self, tab, str):
         sqlStr = "select " + str + " from " + tab
         return sqlStr
+
     def _senteInsert(self, str, tab):
         sqlStr = "insert into " + tab + "(" + str.keys() + ") values ("
         sqlStr += str.values() + ")"
         return sqlStr
+
     def _senteUpdate(self, *str, tab, qualifiction):
         sqlStr = "update " + tab + " set (" + str + ")"
         if qualifiction != "":
             sqlStr += " where " + qualifiction
         return sqlStr
+
     def _senteDelect(self, tab, qualifiction):
         sqlStr = "delect from " + tab + " where " + qualifiction
         return sqlStr
+
     def Database(self, qualifiction, values, key,):
