@@ -5,7 +5,7 @@ Class name:Database
 
  Construction method:__init__()
  Prototype method:
- def __init__(self, localhost, username, password, database)
+  def __init__(self, localhost, username, password, database)
  The function of construction method is to create a database object and
 a database operate.
  It throws a database link exception when it encounters an exception:
@@ -13,14 +13,31 @@ a database operate.
 
 method:operate()
  Prototype method:
- def _operate(self, str)
+  def _operate(self, str)
  The function of the method is to operate the database.
  It returns the result of the execution of the database operation or th-
 rows a database operation exception when an exception is encountered:
     MySQLdb.Error
+
+method:_sentedelect(),_senteinsert(),_senteselect(),_senteupdate()
+ Prototype method:
+  def _senteSelect(self, tab, str)
+  def _senteInsert(self, str, tab)
+  def _senteUpdate(self, *str, tab, qualifiction)
+  def _senteDelect(self, tab, qualifiction)
+ Statement combination:select\delect\insert\update
+ The method return sql statement string
+
+method:_senteSafe()
+ Prototype method:
+  def _senteSafe(self, str)
+ This method is to do security checks
+ This method returns an exception when it detects a SQL statement security problem,or does nothing:
+ safeErerr
 '''
 
 import MySQLdb as mdb
+import re
 
 
 class Database:
@@ -39,30 +56,30 @@ class Database:
         except mdb.Error, e:
             return e
 
-    def sentence(self, *str):
+    def _senteSafe(self, str):
         try:
-            if str[0] == "join":
-                sql = "insert into usr (" + str(str[1]) + "," + str[2]\
-                + "," + str[3] + "," + str[4] + "," + str[5] + ") "\
-                + "values (" + str[6] + "," + str[7] + "," + str[8]\
-                + "," + str[9] + "," + str[10] + " );"
-            elif str[0] == "publish":
-                sql = "insert into movie (" + str[1] + "," + str[2]\
-                + "," + str[3] + "," + str[4] + "," + str[5] + ") "\
-                + "," + str[6] + "," + str[7] + "," + str[8]\
-                + "," + str[9] + "values" + str[10] + "," + str[11] \
-                + "," + str[12] + "," + str[13] + "," + str[14] + ","\
-                + str[15] + "," + str[16] + "," + str[17] + "," +\
-                str[18] + " );"
-            if str[0] == "revise":
-                sql_str = "update " + str[2] + "set "
-                sql_str1 = ""
-                i = 3
-                while i < str[1] + 1:
-                    sql_str1 = sql_str1 + str[i] + "='" + str[i + 1] + "'"
-                    if i < str[1] - 1:
-                        sql_str1 = sql_str1 + ","
-                        i = i + 2
-                    sql = sql_str + " " + sql_str1 + " where " +\
-                    str[len(str)-2] + "=" + str[len(str)-1]
-            if str[0] == "inquire":
+            sqlRe = re.compile(r"\bselect|updata|insert|delect|alter|exec\b"
+                        , re.I)
+            sqlQualifi = re.compile(r'\bwhere|values|from|like|into|set\b'
+                        , re.I)
+            if sqlRe.search(str) != None:
+                if sqlQualifi.search(str) != None:
+                    raise "safeErerr", str
+        except "safeErerr":
+            return "safe ererr:" + e.args
+    def _senteSelect(self, tab, str):
+        sqlStr = "select " + str + " from " + tab
+        return sqlStr
+    def _senteInsert(self, str, tab):
+        sqlStr = "insert into " + tab + "(" + str.keys() + ") values ("
+        sqlStr += str.values() + ")"
+        return sqlStr
+    def _senteUpdate(self, *str, tab, qualifiction):
+        sqlStr = "update " + tab + " set (" + str + ")"
+        if qualifiction != "":
+            sqlStr += " where " + qualifiction
+        return sqlStr
+    def _senteDelect(self, tab, qualifiction):
+        sqlStr = "delect from " + tab + " where " + qualifiction
+        return sqlStr
+    def Database(self, qualifiction, values, key,):
