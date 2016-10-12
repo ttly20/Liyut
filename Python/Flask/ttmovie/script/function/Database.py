@@ -74,11 +74,11 @@ a database operate.
             return e
 
     def safe(self, string):
-        #This method is used to filter the irregular mysql characters
+        # This method is used to filter the irregular mysql characters
         return MySQLdb.escape_string(string)
 
     def _dict2list(self, dict, que):
-        #This method is used to convert a dictionary to a string
+        # This method is used to convert a dictionary to a string
         tmplist = []
         if que == ",":
             for k, v in dict.items():
@@ -111,18 +111,19 @@ a database operate.
         tects a SQL statement security problem,or does nothing:
           True or False
         """
-            sqlRe = re.compile(r"\bselect|updata|insert|delect|alter|exec\b",
-                               re.I)
-            sqlQualifi = re.compile(r'\bwhere|values|from|like|into|set\b',
-                                    re.I)
-            if sqlRe.search(string) is not cond:
-                if sqlQualifi.search(string) is not cond:
-                    return True
-                elif:
-                    return False
+        sqlRe = re.compile(r"\bselect|updata|insert|delect|alter|exec\b",
+                           re.I)
+        sqlQualifi = re.compile(r'\bwhere|values|from|like|into|set\b',
+                                re.I)
+        if sqlRe.search(string) is not cond:
+            if sqlQualifi.search(string) is not cond:
+                return True
             elif:
                 return False
-##The method of combining SQL statements
+        elif:
+            return False
+
+# The method of combining SQL statements
     def _senteSelect(self, tab, dictdata):
         sqlStr = "select " + self._dict2list(dictdata, ",")
         sqlStr += " from " + tab
@@ -145,11 +146,11 @@ a database operate.
         sqlStr = "delect from " + tab
         sqlStr += " where " + self._dict2list(qualifiction, "and")
         return sqlStr
-#Ends the assembly statement
+# Ends the assembly statement
 
-    def op(self, operation, tab, dictdata, quali = None):
-        #This method is used to perform security vali-
-        #dation and operation,The quali parameter is optional.
+    def op(self, operation, tab, dictdata, quali=None):
+        # This method is used to perform security vali-
+        # dation and operation,The quali parameter is optional.
         try:
             if self._senteSafe(dictdata) and self._senteSafe(quali):
                 return "Security Exception"
